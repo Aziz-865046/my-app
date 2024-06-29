@@ -4,14 +4,17 @@ export default function TextForm(props) {
   const handleUpClick = () => {
     let newText = text.toUpperCase();
     setText(newText);
+    props.showAlert("Convert to Upper case", "success");
   };
   const handleLoClick = () => {
     let newText = text.toLowerCase();
     setText(newText);
+    props.showAlert("Convert to Lower case", "success");
   };
   const handleClClick = () => {
     let newText = "";
     setText(newText);
+    props.showAlert("Clear to all text", "success");
   };
   const speak = () => {
     let msg = new SpeechSynthesisUtterance();
@@ -26,6 +29,7 @@ export default function TextForm(props) {
       newtext += text[i];
     }
     setText(newtext);
+    props.showAlert("complete to inversec", "success");
   };
 
   const handleCapitalize = () => {
@@ -34,11 +38,21 @@ export default function TextForm(props) {
       .map((el) => el.charAt(0).toUpperCase() + el.slice(1))
       .join(" ");
     setText(newText);
+    props.showAlert("Convert to capitalize case", "success");
   };
+  // const handleCopy = () => {
+  //   console.log(navigator);
+  //   var text = document.getElementById("mybox");
+  //   // text.select();
+  //   // text.setSelectionRange(0, 9999);
+  //   navigator.clipboard.writeText(text.value);
+  //   console.log(navigator);
+  // };
   const handleOnChange = (e) => {
     setText(e.target.value);
   };
   const [text, setText] = useState("");
+
   return (
     <>
       <div
@@ -76,6 +90,9 @@ export default function TextForm(props) {
         <button className="btn btn-primary mx-1" onClick={handleinverseclick}>
           Reverce
         </button>
+        {/* <button className="btn btn-primary mx-1" onClick={handleCopy}>
+          Copy to Clipboard
+        </button> */}
         <button
           type="submit"
           onClick={speak}
@@ -99,7 +116,7 @@ export default function TextForm(props) {
         <p>
           {text.length > 0
             ? text
-            : "Enter something in the text box to preview it here"}
+            : "Enter something in the text box above to preview it here"}
         </p>
       </div>
     </>
