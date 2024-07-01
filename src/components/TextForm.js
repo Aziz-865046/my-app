@@ -40,14 +40,12 @@ export default function TextForm(props) {
     setText(newText);
     props.showAlert("Convert to capitalize case", "success");
   };
-  // const handleCopy = () => {
-  //   console.log(navigator);
-  //   var text = document.getElementById("mybox");
-  //   // text.select();
-  //   // text.setSelectionRange(0, 9999);
-  //   navigator.clipboard.writeText(text.value);
-  //   console.log(navigator);
-  // };
+  const handleCopy = () => {
+    var text = document.getElementById("mybox");
+    text.select();
+    document.getSelection().removeAllRanges();
+    navigator.clipboard.writeText(text.value);
+  };
   const handleOnChange = (e) => {
     setText(e.target.value);
   };
@@ -68,32 +66,53 @@ export default function TextForm(props) {
             value={text}
             onChange={handleOnChange}
             style={{
-              backgroundColor: props.mode === "dark" ? "grey" : "white",
+              backgroundColor: props.mode === "dark" ? "#13466e" : "white",
               color: props.mode === "dark" ? "white" : "black",
             }}
             id="myBox"
             rows="8"
           ></textarea>
         </div>
-        <button className="btn btn-primary mx-1" onClick={handleUpClick}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
+          onClick={handleUpClick}
+        >
           Convert to UPPERCASE
         </button>
-        <button className="btn btn-primary mx-1" onClick={handleLoClick}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
+          onClick={handleLoClick}
+        >
           Convert to lowercase
         </button>
-        <button className="btn btn-primary mx-1" onClick={handleCapitalize}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
+          onClick={handleCapitalize}
+        >
           Convert to Capitalize Each Word
         </button>
-        <button className="btn btn-primary mx-1" onClick={handleClClick}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
+          onClick={handleClClick}
+        >
           Text to Clear
         </button>
-        <button className="btn btn-primary mx-1" onClick={handleinverseclick}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
+          onClick={handleinverseclick}
+        >
           Reverce
         </button>
-        {/* <button className="btn btn-primary mx-1" onClick={handleCopy}>
+        <button className="btn btn-primary mx-1" onClick={handleCopy}>
           Copy to Clipboard
-        </button> */}
+        </button>
         <button
+          disabled={text.length === 0}
           type="submit"
           onClick={speak}
           className="btn btn-warning mx-2 my-2"
@@ -109,9 +128,20 @@ export default function TextForm(props) {
       >
         <h1>Your text summary</h1>
         <p>
-          {text.split(" ").length - 1} Words and {text.length} Characters
+          {
+            text.split(" ").filter((element) => {
+              return element.length !== 0;
+            }).length
+          }{" "}
+          Words and {text.length} Characters
         </p>
-        <p>{0.008 * text.split(" ").length} Minutes to read text.</p>
+        <p>
+          {0.008 *
+            text.split(" ").filter((element) => {
+              return element.length !== 0;
+            }).length}{" "}
+          Minutes to read text.
+        </p>
         <h2>Preview</h2>
         <p>
           {text.length > 0
