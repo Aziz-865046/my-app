@@ -40,12 +40,12 @@ export default function TextForm(props) {
     setText(newText);
     props.showAlert("Convert to capitalize case", "success");
   };
-  const handleCopy = () => {
-    var text = document.getElementById("mybox");
-    text.select();
-    document.getSelection().removeAllRanges();
-    navigator.clipboard.writeText(text.value);
-  };
+  // const handleCopy = () => {
+  //   var text = document.getElementById("mybox");
+  //   text.select();
+  //   document.getSelection().removeAllRanges();
+  //   navigator.clipboard.writeText(text.value);
+  // };
   const handleOnChange = (e) => {
     setText(e.target.value);
   };
@@ -108,14 +108,15 @@ export default function TextForm(props) {
         >
           Reverce
         </button>
-        <button className="btn btn-primary mx-1" onClick={handleCopy}>
+        {/* <button className="btn btn-primary mx-1" onClick={handleCopy}>
           Copy to Clipboard
-        </button>
+        </button> */}
         <button
           disabled={text.length === 0}
           type="submit"
           onClick={speak}
           className="btn btn-warning mx-2 my-2"
+          style={{ border: "1px solid black" }}
         >
           Speak
         </button>
