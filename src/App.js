@@ -1,4 +1,3 @@
-// import logo from "./logo.svg";
 import { useState } from "react";
 import "./App.css";
 import About from "./components/About";
@@ -21,18 +20,7 @@ function App() {
       setAlert(null);
     }, 2000);
   };
-
-  const removeBodyClass = () => {
-    document.body.classList.remove("bg-light");
-    document.body.classList.remove("bg-dark");
-    document.body.classList.remove("bg-success");
-    document.body.classList.remove("bg-danger");
-    document.body.classList.remove("bg-warning");
-  };
-  const toggleMode = (cls) => {
-    console.log(cls);
-    removeBodyClass();
-    document.body.classList.add("bg-" + cls);
+  const toggleMode = () => {
     if (mode === "light") {
       setMode("dark");
       document.body.style.backgroundColor = "#042743";
@@ -66,7 +54,6 @@ function App() {
                 showAlert={showAlert}
                 heading="Enter the text to analyze below"
                 mode={mode}
-                // toggleMode={toggleMode}
               />
             </Route>
           </Switch>

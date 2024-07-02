@@ -40,12 +40,13 @@ export default function TextForm(props) {
     setText(newText);
     props.showAlert("Convert to capitalize case", "success");
   };
-  // const handleCopy = () => {
-  //   var text = document.getElementById("mybox");
-  //   text.select();
-  //   document.getSelection().removeAllRanges();
-  //   navigator.clipboard.writeText(text.value);
-  // };
+  const handleCopy = () => {
+    var copyText = document.getElementById("myBox");
+    copyText.select();
+    navigator.clipboard.writeText(copyText.value);
+    props.showAlert("Text copy on clipboard", "success");
+    document.getSelection().removeAllRanges();
+  };
   const handleOnChange = (e) => {
     setText(e.target.value);
   };
@@ -78,28 +79,28 @@ export default function TextForm(props) {
           className="btn btn-primary mx-1 my-1"
           onClick={handleUpClick}
         >
-          Convert to UPPERCASE
+          UPPERCASE
         </button>
         <button
           disabled={text.length === 0}
           className="btn btn-primary mx-1 my-1"
           onClick={handleLoClick}
         >
-          Convert to lowercase
+          lowercase
         </button>
         <button
           disabled={text.length === 0}
           className="btn btn-primary mx-1 my-1"
           onClick={handleCapitalize}
         >
-          Convert to Capitalize Each Word
+          Capitalize
         </button>
         <button
           disabled={text.length === 0}
           className="btn btn-primary mx-1 my-1"
           onClick={handleClClick}
         >
-          Text to Clear
+          Clear
         </button>
         <button
           disabled={text.length === 0}
@@ -108,15 +109,14 @@ export default function TextForm(props) {
         >
           Reverce
         </button>
-        {/* <button className="btn btn-primary mx-1" onClick={handleCopy}>
-          Copy to Clipboard
-        </button> */}
+        <button className="btn btn-primary mx-1" onClick={handleCopy}>
+          Copy
+        </button>
         <button
           disabled={text.length === 0}
           type="submit"
           onClick={speak}
           className="btn btn-warning mx-2 my-2"
-          style={{ border: "1px solid black" }}
         >
           Speak
         </button>
@@ -130,7 +130,7 @@ export default function TextForm(props) {
         <h1>Your text summary</h1>
         <p>
           {
-            text.split(" ").filter((element) => {
+            text.split(/\s+/).filter((element) => {
               return element.length !== 0;
             }).length
           }{" "}
@@ -153,31 +153,3 @@ export default function TextForm(props) {
     </>
   );
 }
-// Function to Capitalise the text:
-//  const handleCapitalise = () => {
-//     const lowerCase = text.toLowerCase();
-//     const handle = lowerCase[0].toUpperCase() + lowerCase.slice(1);
-//     setText(handle);
-//   };
-//////////////////////////////////////////////////////////////////////////////////////
-// const [fWord, findWord] = useState("");
-// const [rWord, replaceWord] = useState("");
-// Function :
-// const handlefindChange = (event) => {
-//     findWord(event.target.value);
-//   };
-//   const handleReplaceChange = (event) => {
-//   console.log(replaceWord(event.target.value)) ;
-//   };
-//   const handleReplaceClick = () => {
-//     let newText = text.replaceAll(fWord,rWord);
-//     setText(newText);
-//   };
-// TextArea  Of Find Words:
-//           value={fWord}
-//           onChange = {handleFindChange}
-// TextArea Of Replace Words :
-//           value={rWord}
-//           onChange = {handleReplaceChange}
-// add event on button  :
-//           onclick = {handleReplaceClick}
